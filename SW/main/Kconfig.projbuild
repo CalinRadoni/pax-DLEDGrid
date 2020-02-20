@@ -1,0 +1,17 @@
+menu "Dev34 DLEDGrid"
+
+    config NUMBER_OF_LEDS
+        int "Number of LEDS"
+        range 1 300
+        default 64
+        help
+            This sets the number of WS2812 LEDS
+
+    config MAX_LED_COLOR_VALUE
+        int "Maximum LED color value (8 - 255)"
+        range 8 255
+        default 32
+        help
+            This sets the maximum value of each LED color
+
+endmenu

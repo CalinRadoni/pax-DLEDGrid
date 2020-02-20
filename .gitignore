@@ -1,0 +1,15 @@
+# ignore archives
+*.7z
+*.zip
+
+# ignore KiCad's backup files
+/HW/*.bak
+/HW/*.kicad_pcb-bak
+
+# ingnore esp-idf's sdkconfig files
+/SW/build/
+/SW/sdkconfig
+/SW/sdkconfig.old
+
+# ignore Visual Studio Code's workspace files
+*.code-workspace
