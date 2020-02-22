@@ -9,6 +9,7 @@
             "name": "Linux",
             "intelliSenseMode": "gcc-x64",
             "compilerPath": "${compiler-path}/xtensa-esp32-elf-g++",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "defines": [ "ESP32", "ESP_PLATFORM" ],
