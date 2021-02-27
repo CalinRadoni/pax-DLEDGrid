@@ -1,6 +1,6 @@
 /**
-This file is part of pax-devices (https://github.com/CalinRadoni/pax-devices)
-Copyright (C) 2019+ by Calin Radoni
+This file is part of pax-LampD1 (https://github.com/CalinRadoni/pax-LampD1)
+Copyright (C) 2019 by Calin Radoni
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,11 +16,12 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BoardDev34_H
-#define BoardDev34_H
+#ifndef TheBoard_H
+#define TheBoard_H
 
 #include "Board.h"
 #include "Debouncer.h"
+#include "HTTPSrv.h"
 
 /**
  * Hardware
@@ -36,11 +37,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * extPwr IO26, 1 = power on, 0 = power off (controls a NMOS-PMOS pair)
  */
 
-class BoardDev34 : public Board
+class TheBoard : public Board
 {
 public:
-    BoardDev34(void);
-    virtual ~BoardDev34(void);
+    TheBoard(void);
+    virtual ~TheBoard(void);
 
     /**
      * @brief Perform basic hardware initialization
@@ -53,15 +54,13 @@ public:
 
     virtual esp_err_t BoardInit(void);
 
-    /**
-     * @brief Turn off the output power
-     */
-    void PowerOn(void);
+    virtual esp_err_t PostInit(void);
 
-    /**
-     * @brief Turn on the output power
-     */
-    void PowerOff(void);
+    virtual bool PowerPeripherals(bool);
+
+    esp_err_t StartTheServers(void);
+    void StopTheServers(void);
+    esp_err_t ConfigureMDNS(void);
 
     /** To be used with the onboard button */
     Debouncer debouncer;
@@ -71,6 +70,29 @@ public:
      */
     bool OnboardButtonPressed(void);
 
+    /**
+     * @brief The server queue is used to read the commands received by the HTTP server
+     */
+    QueueHandle_t GetHttpServerQueue(void);
+
+    /**
+     * @brief Refresh system state
+     *
+     * @param printResult Prints system state after refresh
+     */
+    void RefreshSystemState(bool printResult);
+
+    /**
+     * The HTTP server is public to ease the transfer of data from main app to it
+     */
+    HTTPSrv httpServer;
+
+    /**
+     * Objects for hardware interfaces
+     */
+    esp32hal::GPIO gpio;
+
+protected:
 private:
 };
 

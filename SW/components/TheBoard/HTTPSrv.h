@@ -1,7 +1,6 @@
 /**
-This file is part of BoardManager esp-idf component from
-pax-devices (https://github.com/CalinRadoni/pax-devices)
-Copyright (C) 2019+ by Calin Radoni
+This file is part of pax-LampD1 (https://github.com/CalinRadoni/pax-LampD1)
+Copyright (C) 2019 by Calin Radoni
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -17,16 +16,29 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef BoardEvents_H
-#define BoardEvents_H
+#ifndef HTTPSrv_H
+#define HTTPSrv_H
 
-#include "Events.h"
+#include "pax_http_server.h"
 
-const EventBits_t xBitStaConnected        = ( 1 << 0 );
-const EventBits_t xBitStaDisconnected     = ( 1 << 1 );
-const EventBits_t xBitScanDone            = ( 1 << 2 );
-const EventBits_t xBitAPStarted           = ( 1 << 3 );
-const EventBits_t xBitAPStopped           = ( 1 << 4 );
-const EventBits_t xBitCredentialsReceived = ( 1 << 5 );
+class HTTPSrv : public PaxHttpServer
+{
+public:
+    HTTPSrv(void);
+    virtual ~HTTPSrv();
+
+    /**
+     * Data for status string
+     */
+    uint32_t animationID = 0;
+    uint32_t currentColor = 0x010101;
+    uint32_t currentIntensity = 0;
+
+protected:
+    /**
+     * @warning Delete returned string with 'free' !
+     */
+    virtual char* CreateJSONStatusString(bool addWhitespaces);
+};
 
 #endif

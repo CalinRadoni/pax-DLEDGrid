@@ -1,14 +1,11 @@
 set(c_SOURCE_FILES
-    "main.cpp"
+    "TheBoard.cpp"
+    "HTTPSrv.cpp"
 )
 
 set(c_PRIVATE_REQUIREMENTS
-    TheBoard
     ESP32BoardManager
     Debouncer
-    ESP32SimpleOTA
-    ESP32DLEDController
-    esp_http_server
 )
 
 idf_component_register(

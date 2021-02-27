@@ -1,27 +1,27 @@
 {
     "env" : {
-        "esp-idf-path": "${env:HOME}/esp/esp-idf",
-        "codeLib-path": "${env:CodeLib_PATH}",
-        "compiler-path": "${env:HOME}/.espressif/tools/xtensa-esp32-elf/esp32-2019r1-8.2.0/xtensa-esp32-elf/bin"
+        "idf_path": "${env:IDF_PATH}",
+        "codeLib_path": "${env:CodeLib_PATH}"
     },
     "configurations": [
         {
             "name": "Linux",
             "intelliSenseMode": "gcc-x64",
-            "compilerPath": "${compiler-path}/xtensa-esp32-elf-g++",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "compilerPath": "${env:IDF_XTENSA_GCC}",
             "cStandard": "c11",
             "cppStandard": "c++17",
             "defines": [ "ESP32", "ESP_PLATFORM" ],
             "includePath": [
-                "${workspaceFolder}",
-                "${workspaceFolder}/main",
-                "${workspaceFolder}/components/**",
-                "${codeLib-path}/Generic",
-                "${codeLib-path}/ESP32",
-                "${esp-idf-path}/components/**"
+                "${idf_path}/components/**",
+                "${codeLib_path}/**",
+                "${workspaceFolder}/**"
             ],
             "browse": {
+                "path": [
+                    "${idf_path}/components",
+                    "${codeLib_path}",
+                    "${workspaceFolder}"
+                ],
                 "limitSymbolsToIncludedHeaders": false
             }
         }
